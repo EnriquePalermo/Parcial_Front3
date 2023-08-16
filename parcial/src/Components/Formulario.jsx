@@ -5,6 +5,8 @@ function Formulario({mostrarDatos}) {
     const [nombre, setNombre] = useState('');
     const [color, setColor] = useState('');
     const [mensajeError, setMensajeError] = useState('');
+    const [nombreIngresado, setNombreIngresado] = useState(false);
+    const [colorIngresado, setColorIngresado] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -18,6 +20,8 @@ function Formulario({mostrarDatos}) {
         mostrarDatos(nombre, color);
         setNombre("");
         setColor("");
+        setNombreIngresado(true);
+        setColorIngresado(true);
         setMensajeError("");
 
 }
@@ -31,6 +35,7 @@ return (
           placeholder="Ingresa tu nombre aquí" 
           value={nombre} 
           onChange={(e) => setNombre (e.target.value)}
+          disabled={nombreIngresado}
           />
       </label>
       <br />
@@ -40,11 +45,12 @@ return (
           placeholder="Ingrese un color aquí" 
           value={color} 
           onChange={(e) => setColor (e.target.value)}
+          disabled={colorIngresado}
            />
         </label>
         <br />
         <br />
-        <button type="submit">Enviar</button>
+        <button type="submit" disabled={colorIngresado} >Enviar</button>
         </form>
         {mensajeError && <p className="error">{mensajeError}</p>}
 
